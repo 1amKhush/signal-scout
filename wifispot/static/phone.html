@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>wifispot phone</title>
+<link rel="stylesheet" href="/static/phone.css">
+</head>
+<body>
+<main>
+  <h1>wifispot</h1>
+  <p class="muted">This phone adds location to the laptop's Wi-Fi measurements. Carry it <b>with the laptop</b>.</p>
+
+  <section class="card">
+    <div class="row"><span>Laptop</span><b id="link">Connecting…</b></div>
+    <div class="row"><span>Location</span><b id="acc">Not shared yet</b></div>
+    <p class="note" id="acc-note"></p>
+    <button id="start" class="primary">Share location</button>
+  </section>
+
+  <section class="card">
+    <p id="survey">…</p>
+    <button id="measure" class="primary" disabled>Measure here</button>
+    <p class="note">Set the laptop down first. Both devices should stay still during the measurement.</p>
+  </section>
+
+  <section class="card" id="rec-card" hidden>
+    <div class="muted small">Recommendation</div>
+    <p class="big" id="rec"></p>
+    <p id="nav"></p>
+  </section>
+</main>
+<script src="/static/phone.js"></script>
+</body>
+</html>
