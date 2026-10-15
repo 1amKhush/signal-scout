@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>wifispot</title>
+<link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">wifispot</div>
+  <div class="conn" id="conn">Connecting…</div>
+  <button class="chip" id="phone-chip" type="button">Pair phone</button>
+</header>
+
+<nav class="tabs" role="tablist">
+  <button role="tab" data-tab="now" aria-selected="true">Now</button>
+  <button role="tab" data-tab="networks" aria-selected="false">Networks</button>
+  <button role="tab" data-tab="survey" aria-selected="false">Find a better spot</button>
+</nav>
+
+<main>
+  <div class="offline" id="offline" hidden>Lost contact with the wifispot process. Is it still running?</div>
+
+  <section id="tab-now" class="tab">
+    <div id="settled"></div>
+    <div class="tiles" id="tiles"></div>
+    <div class="card">
+      <h2>Signal strength <span class="sub">dBm, last 5 minutes</span></h2>
+      <div id="chart-signal"></div>
+    </div>
+    <div class="card">
+      <h2>Latency <span class="sub">ms, log scale, last 5 minutes</span></h2>
+      <div id="chart-latency"></div>
+    </div>
+    <div class="card">
+      <h2>Traffic <span class="sub">Mb/s through this interface</span></h2>
+      <div id="chart-traffic"></div>
+    </div>
+    <div class="card">
+      <h2>Radio details</h2>
+      <dl class="details" id="radio"></dl>
+    </div>
+  </section>
+
+  <section id="tab-networks" class="tab" hidden>
+    <div class="card">
+      <div class="row-between">
+        <p id="aps-summary" class="lead"></p>
+        <button id="rescan" type="button">Rescan</button>
+      </div>
+      <p class="muted small" id="aps-age"></p>
+    </div>
+    <div id="band-charts"></div>
+    <div class="card">
+      <h2>All access points</h2>
+      <div class="table-wrap"><table id="aps-table"></table></div>
+    </div>
+  </section>
+
+  <section id="tab-survey" class="tab" hidden>
+    <div class="card wizard" id="wizard">
+      <div id="wizard-text"></div>
+      <div class="progress" id="progress" hidden><div class="bar"></div></div>
+      <form class="measure-row" id="measure-form">
+        <input id="spot-label" maxlength="60" autocomplete="off" placeholder="Name this spot (optional), e.g. desk by window">
+        <button id="measure-btn" class="primary" type="submit">Measure here</button>
+        <button id="cancel-btn" type="button" hidden>Cancel</button>
+      </form>
+      <div class="row-between small">
+        <span class="muted" id="phone-hint"></span>
+        <button id="new-survey" class="link" type="button">Start a new survey</button>
+      </div>
+    </div>
+    <div id="recommendation"></div>
+    <div class="card">
+      <div class="row-between">
+        <h2>Survey map</h2>
+        <div class="seg" id="map-views">
+          <button type="button" data-view="graph" aria-pressed="true">Spot graph</button>
+          <button type="button" data-view="geo" aria-pressed="false">Geographic</button>
+        </div>
+      </div>
+      <label class="small check"><input type="checkbox" id="interp" checked> <span id="interp-label">Show interpolated signal</span></label>
+      <div id="map" class="map"></div>
+      <div id="map-legend" class="legend"></div>
+      <p class="muted small" id="map-note"></p>
+    </div>
+    <div class="card">
+      <h2>Surveyed spots</h2>
+      <div class="table-wrap"><table id="spots-table"></table></div>
+    </div>
+  </section>
+</main>
+
+<dialog id="pair-dialog">
+  <h2>Pair a phone (optional)</h2>
+  <p class="small">The phone only adds <b>location</b> to your measurements. Wi-Fi is always measured by this laptop.</p>
+  <div class="pair-grid">
+    <div id="qr" class="qr"></div>
+    <ol class="small">
+      <li>Join the phone to the <b>same Wi-Fi</b> as this laptop and scan the code.</li>
+      <li>The phone warns about the certificate (this laptop signs its own). Tap <b>Advanced → Proceed</b>.</li>
+      <li>Tap <b>Share location</b> and allow precise location.</li>
+      <li>Carry the phone <b>with the laptop</b> during the survey.</li>
+    </ol>
+  </div>
+  <p class="small url" id="pair-url"></p>
+  <p class="small" id="pair-status"></p>
+  <p class="muted small">If the page never loads on the phone, the network probably blocks device-to-device traffic (common on campus and guest Wi-Fi). Everything else works without the phone.</p>
+  <div class="row-between">
+    <button id="unpair" type="button">Unpair</button>
+    <button id="pair-close" class="primary" type="button">Done</button>
+  </div>
+</dialog>
+
+<div class="tip" id="tip" hidden></div>
+<script src="/static/app.js"></script>
+</body>
+</html>
