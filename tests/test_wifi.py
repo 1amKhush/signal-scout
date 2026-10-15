@@ -1,4 +1,4 @@
-from wifispot import wifi
+from signalscout import wifi
 
 SCAN = r"""*:84\:F1\:47\:C9\:B0\:2D:IITJ_WLAN:52:5260 MHz:260 Mbit/s:20 MHz:68:WPA1 WPA2 802.1X
  :AE\:3B\:76\:E4\:6E\:7D:SRP:36:5180 MHz:270 Mbit/s:80 MHz:59:WPA2

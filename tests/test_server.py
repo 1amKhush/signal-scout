@@ -6,9 +6,9 @@ import time
 
 import pytest
 
-from wifispot.phone import Phone
-from wifispot.server import App, Server
-from wifispot.survey import SurveyManager
+from signalscout.phone import Phone
+from signalscout.server import App, Server
+from signalscout.survey import SurveyManager
 
 from test_survey import FakeMonitor, wait_idle
 
@@ -33,7 +33,7 @@ def app(tmp_path, monkeypatch):
     srv = Server(("127.0.0.1", 0), app)
     threading.Thread(target=srv.serve_forever, daemon=True).start()
     app.port = srv.server_address[1]
-    monkeypatch.setattr("wifispot.wifi.iface_ip", lambda iface: "127.0.0.1")
+    monkeypatch.setattr("signalscout.wifi.iface_ip", lambda iface: "127.0.0.1")
     yield app
     app.stop_phone()
     srv.shutdown()

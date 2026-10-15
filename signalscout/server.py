@@ -142,7 +142,7 @@ class App:
 
 class Handler(BaseHTTPRequestHandler):
     protocol_version = "HTTP/1.1"
-    server_version = "wifispot"
+    server_version = "SignalScout"
     timeout = 30
     server: Server
 

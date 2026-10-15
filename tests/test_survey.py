@@ -1,7 +1,7 @@
 import time
 
-from wifispot.phone import Phone
-from wifispot.survey import SurveyManager
+from signalscout.phone import Phone
+from signalscout.survey import SurveyManager
 
 
 class FakeMonitor:

@@ -1,6 +1,6 @@
 import random
 
-from wifispot import analysis as a
+from signalscout import analysis as a
 
 
 def window(signal, rtt, loss=0.0, bitrate=300.0, n_sig=12, n_ping=48, seed=1, noise=1.0):

@@ -1,4 +1,4 @@
-from wifispot.monitor import Pinger
+from signalscout.monitor import Pinger
 
 
 def make():

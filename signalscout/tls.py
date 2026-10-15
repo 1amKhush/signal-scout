@@ -19,7 +19,7 @@ def ensure_cert(directory: Path, ip: str) -> tuple[Path, Path]:
         return cert, key
     subprocess.run(
         ["openssl", "req", "-x509", "-newkey", "ec", "-pkeyopt", "ec_paramgen_curve:prime256v1",
-         "-nodes", "-days", "825", "-subj", "/CN=wifispot",
+         "-nodes", "-days", "825", "-subj", "/CN=SignalScout",
          "-addext", f"subjectAltName=IP:{ip}", "-keyout", str(key), "-out", str(cert)],
         check=True, capture_output=True,
     )

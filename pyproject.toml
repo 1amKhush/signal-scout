@@ -1,5 +1,5 @@
 [project]
-name = "wifispot"
+name = "signalscout"
 version = "0.1.0"
 description = "Linux Wi-Fi mapping and decision assistant: find a better spot, optionally with a phone for positioning"
 readme = "README.md"
@@ -7,7 +7,7 @@ requires-python = ">=3.10"
 dependencies = ["segno>=1.6"]
 
 [project.scripts]
-wifispot = "wifispot.__main__:main"
+signalscout = "signalscout.__main__:main"
 
 [dependency-groups]
 dev = ["pytest>=8"]
@@ -17,7 +17,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["wifispot"]
+packages = ["signalscout"]
 
 [tool.pytest.ini_options]
 pythonpath = ["tests"]

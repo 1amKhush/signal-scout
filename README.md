@@ -1,4 +1,4 @@
-# wifispot
+# SignalScout
 
 A Linux Wi-Fi mapping and decision assistant. It shows the access points around you, monitors
 your connection live, and walks you through a short survey of candidate spots to tell you
@@ -7,7 +7,7 @@ be paired by QR code to add location to the measurements.
 
 The phone improves **where** a measurement was taken, never the Wi-Fi measurement itself:
 all Wi-Fi data comes from the laptop. Phone positioning is good outdoors and often too coarse
-indoors; wifispot checks the reported accuracy and falls back gracefully.
+indoors; SignalScout checks the reported accuracy and falls back gracefully.
 
 ## Requirements
 
@@ -18,8 +18,8 @@ indoors; wifispot checks the reported accuracy and falls back gracefully.
 ## Run
 
 ```sh
-uv run wifispot            # opens http://127.0.0.1:8765 in your browser
-uv run wifispot --help     # --iface, --port, --phone-port, --window, --internet-host, --data-dir
+uv run signalscout            # opens http://127.0.0.1:8765 in your browser
+uv run signalscout --help     # --iface, --port, --phone-port, --window, --internet-host, --data-dir
 uv run pytest              # tests
 ```
 
@@ -47,7 +47,7 @@ Each measurement window records signal (1 Hz), pings to the router (4/s), and li
 runs a scan so off-channel scanning cannot disturb the latency samples. A spot's score (0–100)
 weights signal 30 %, packet loss 25 %, latency 20 %, link rate 15 %, and latency spikes 10 %.
 
-wifispot only says **Move** when the best spot beats the starting spot by at least 5 points
+SignalScout only says **Move** when the best spot beats the starting spot by at least 5 points
 (about 5 dB of signal or 1 % loss) *and* a block bootstrap of the window's samples puts that
 ahead with ≥ 90 % probability. Otherwise it says **Stay**. The size threshold exists because
 the bootstrap only sees noise inside a 12-second window, and real conditions drift more than that.
@@ -71,7 +71,7 @@ or only one alternative spot measured. Ties between good spots are reported as t
 - The laptop UI listens on `127.0.0.1` only and rejects foreign `Host` headers and non-JSON posts.
 - The phone server starts only when you pair, listens on the Wi-Fi address, and requires the random
   token in the QR code. *Unpair* revokes it.
-- Surveys are saved as JSON under `~/.local/share/wifispot/surveys/`. Nothing leaves the machine except
+- Surveys are saved as JSON under `~/.local/share/signalscout/surveys/`. Nothing leaves the machine except
   pings to your router and to `1.1.1.1` once per second (`--internet-host ""` disables that).
 
 ## Limitations
